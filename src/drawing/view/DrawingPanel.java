@@ -21,7 +21,11 @@ public class DrawingPanel extends JPanel
 		this.baseController = baseController;
 		this.shapePanel = new ShapePanel(baseController);
 		this.baseLayout = new SpringLayout();
+		baseLayout.putConstraint(SpringLayout.NORTH, shapePanel, 10, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, shapePanel, -10, SpringLayout.EAST, this);
 		this.button = new JButton();
+		baseLayout.putConstraint(SpringLayout.NORTH, button, 72, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, button, 10, SpringLayout.WEST, this);
 		setupPannel();
 		setupLayout();
 		setupListeners();
