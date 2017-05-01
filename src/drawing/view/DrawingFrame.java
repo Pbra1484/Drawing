@@ -8,8 +8,8 @@ import drawing.controller.Controller;
 
 public class DrawingFrame extends JFrame 
 {
-	Controller baseController;
-	DrawingPanel drawingPanel;
+	private Controller baseController;
+	private DrawingPanel drawingPanel;
 	
 	public DrawingFrame(Controller baseController)
 	{
@@ -23,9 +23,10 @@ public class DrawingFrame extends JFrame
 	private void setupFrame()
 	{
 		this.setContentPane(drawingPanel);
-		this.setSize(new Dimension(600, 600));
+		this.setSize(new Dimension(800, 800));
 		this.setTitle("yep");
 		this.setLocationRelativeTo(null);
+		this.setResizable(true);
 		this.setVisible(true);
 	}
 

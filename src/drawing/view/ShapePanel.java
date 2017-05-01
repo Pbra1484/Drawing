@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
-
 import javax.swing.*;
 import drawing.controller.Controller;
 
@@ -29,20 +28,25 @@ public class ShapePanel extends JPanel
 	{
 		super();
 		this.baseController = baseController;
+		shapes = new ArrayList<ArrayList<Shape>>();
 		rectangleList = new ArrayList<Shape>();
 		triangleList = new ArrayList<Shape>();
 		circleList = new ArrayList<Shape>();
 		ellipseList = new ArrayList<Shape>();
 		polygonList = new ArrayList<Shape>();
-		
+		shapes.add(circleList);
+		shapes.add(rectangleList);
+		shapes.add(ellipseList);
+		shapes.add(triangleList);
+		shapes.add(polygonList);
 		setupPannel();
-
+		
 	}
 	
 	private void setupPannel()
 	{
 		this.setBackground(Color.BLUE);
-		this.setMinimumSize(new Dimension(250, 500));
+		this.setPreferredSize(new Dimension(200, 200));
 	}
 	
 	private Color getRandomColor()
@@ -57,7 +61,7 @@ public class ShapePanel extends JPanel
 
 	public void addRectangels() 
 	{
-		for(int index = 0; index < 500; index++)
+		for(int index = 0; index < 30; index++)
 		{
 			int width = (int)(Math.random() * 120) + 1;
 			int height = (int)(Math.random() * 150) + 15;
@@ -86,7 +90,7 @@ public class ShapePanel extends JPanel
 	{
 		for(Shape currentShape : shapeList)
 		{
-			graphics.setColor(getRandomColor());;
+			graphics.setColor(getRandomColor());
 			int strokeWidth = (int) (Math.random() * 10) + 1;
 			graphics.setStroke(new BasicStroke(strokeWidth));
 			
@@ -103,6 +107,24 @@ public class ShapePanel extends JPanel
 				graphics.draw(currentShape);
 			}	
 		}
+	}
+	
+	public void addCircles()
+	{
+		if(circleList.size() > 500)
+		{
+			circleList.clear();
+		}
+		
+		for(int index = 0; index < 30; index++)
+		{
+			int radius = (int) (Math.random() * 25) + 2;
+			int xCorner = (int) (Math.random() * this.getWidth() - 15);
+			int yCorner = (int) (Math.random() * this.getHeight() - 15);
+			Ellipse2D.Double current = new Ellipse2D.Double(xCorner, yCorner, radius, radius);
+			circleList.add(current);
+		}
+		this.repaint();
 	}
 	
 	public void addEllipses()
@@ -172,6 +194,8 @@ public class ShapePanel extends JPanel
 		}
 		this.repaint();
 	}
+	
+	
 	
 	public void reset()
 	{
