@@ -12,6 +12,7 @@ public class DrawingPanel extends JPanel
 {
 	private Controller baseController;
 	private ShapePanel shapePanel;
+	private GraphPanel graphPanel;
 	private DrawingFrame baseFrame;
 	private SpringLayout baseLayout;
 	private JButton rectButton;
@@ -30,9 +31,14 @@ public class DrawingPanel extends JPanel
 		this.baseController = baseController;
 		this.shapePanel = new ShapePanel(baseController);
 		this.baseLayout = new SpringLayout();
+		baseLayout.putConstraint(SpringLayout.SOUTH, shapePanel, -310, SpringLayout.SOUTH, this);
+		this.graphPanel = new GraphPanel(setupArray());
+		baseLayout.putConstraint(SpringLayout.NORTH, graphPanel, -300, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, graphPanel, 250, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, graphPanel, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, graphPanel, -10, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, shapePanel, 10, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, shapePanel, 250, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, shapePanel, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, shapePanel, -10, SpringLayout.EAST, this);
 		
 		this.title = new JLabel("Drawing with Java!");
@@ -62,6 +68,7 @@ public class DrawingPanel extends JPanel
 		this.setPreferredSize(new Dimension(800, 800));
 		
 		this.add(shapePanel);
+		this.add(graphPanel);
 		this.add(rectButton);
 		this.add(circButton);
 		this.add(elliButton);
@@ -140,5 +147,16 @@ public class DrawingPanel extends JPanel
 				shapePanel.reset();
 			}
 		});
+	}
+	
+	public int [] setupArray()
+	{
+		int length = (int) (Math.random() * 10) + 3;
+		int [] randomArray = new int[length];
+		for(int index = 0; index < length; index++)
+		{
+			randomArray [index] = (int) (Math.random() * 50) + 3;
+		}
+		return randomArray;
 	}
 }
